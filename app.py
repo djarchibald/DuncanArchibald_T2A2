@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 
@@ -64,3 +64,19 @@ def get_lens(id):
     lens = Lens.query.get(id)
     data = lens_schema.dump(lens)
     return data
+
+@app.route("/books", methods= ["POST"])
+def post_lens():
+#Lens fields received from request (from flask) & use schema to load.
+
+    lens_fields = lens_schema.load(request.json)
+    lens = Lens(
+          model = lens_fields["model"],
+          manufacturer = lens_fields["manufacturer"],
+          mount = lens_fields["mount"],
+          max_aperture = lens_fields["max_aperture"]
+    )
+
+db.session.add(lens)
+db.session.commit()
+return lens_schema.dump(lens)
