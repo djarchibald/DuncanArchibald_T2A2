@@ -58,9 +58,86 @@ def seed_db():
     lens2.max_aperture = "4"
     
     db.session.add(lens2)
-     
+
+    lens3 = Lens()
+    lens3.model = "RF 15-35mm f/2.8L IS USM"
+    lens3.manufacturer = "Canon"
+    lens3.mount = "RF"
+    lens3.max_aperture = "2.8"
+
+    db.session.add(lens3)
+
+    lens4 = Lens()
+    lens4.model = "10-24mm f/3.5-4.5 Di II VC HLD"
+    lens4.manufacturer = "Tamron"
+    lens4.mount = "EF"
+    lens4.max_aperture = "3.5"
+
+    db.session.add(lens4)
+
+    lens5 = Lens()
+    lens5.model = "AF 85mm F1.4 DG HSM Art"
+    lens5.manufacturer = "Sigma"
+    lens5.mount = "EF"
+    lens5.max_aperture = "1.4"
+
+    db.session.add(lens5)
+
+    lens6 = Lens()
+    lens6.model = "XF16-55mm F2.8 R LM WR"
+    lens6.manufacturer = "Fujinon"
+    lens6.mount = "X"
+    lens6.max_aperture = "2.8"
+
+    db.session.add(lens6)
+
+    lens7 = Lens()
+    lens7.model = "FE 24-70mm f/2.8 G Master"
+    lens7.manufacturer = "Sony"
+    lens7.mount = "FE"
+    lens7.max_aperture = "2.8"
+
+    db.session.add(lens7)
+
+    lens8 = Lens()
+    lens8.model = "24-70mm f/2.8 DG DN Art"
+    lens8.manufacturer = "Sigma"
+    lens8.mount = "EF"
+    lens8.max_aperture = "2.8"
+
+    db.session.add(lens8)
+
+    lens9 = Lens()
+    lens9.model = "FE 50mm f/1.4 GM"
+    lens9.manufacturer = "Sony"
+    lens9.mount = "FE"
+    lens9.max_aperture = "1.4"
+
+    db.session.add(lens9)
+
+    lens10 = Lens()
+    lens10.model = "Super-Elmar-M 18mm f/3.8 ASPH"
+    lens10.manufacturer = "Leica"
+    lens10.mount = "M"
+    lens10.max_aperture = "3.8"
+
+    db.session.add(lens10)
+
+    lens11 = Lens()
+    lens11.model = "SUMMILUX-M 21 f/1.4 ASPH"
+    lens11.manufacturer = "Leica"
+    lens11.mount = "M"
+    lens11.max_aperture = "1.4"
+
+    db.session.add(lens11)
+
     db.session.commit()
     print ("tables seeded")
+
+@app.cli.command("drop")
+def drop_db():
+     db.drop_all()
+     print ("tables dropped")
 
     #  lens_list = Lens[
     #     ("RF 70-200 f/2.8L IS USM", "Canon", "RF", "2.8"),
