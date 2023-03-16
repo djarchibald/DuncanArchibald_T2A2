@@ -22,12 +22,12 @@ class Lens (db.Model):
         mount = db.Column(db.String(), nullable = False)
         max_aperture = db.Column(db.String(3), nullable = False)
         focal_length = db.Column(db.String(50), nullable=False)
-        owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+        owner_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
 
 class User(db.Model):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, primary_key=True)
     verified = db.Column(db.Boolean, nullable=False, default=False)
     name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False)
@@ -36,18 +36,18 @@ class User(db.Model):
 class Comment(db.Model):
     __tablename__ = 'comments'
 
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    lens_id = db.Column(db.Integer, db.ForeignKey('lenses.id'), nullable=False)
+    comment_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    lens_id = db.Column(db.Integer, db.ForeignKey('lenses.lens_id'), nullable=False)
     comment = db.Column(db.String(500), nullable=False)
 
 class Borrow(db.Model):
     __tablename__ = 'borrows'
 
-    id = db.Column(db.Integer, primary_key=True)
-    lens_id = db.Column(db.Integer, db.ForeignKey('lenses.id'), nullable=False)
-    lender_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    borrower_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    borrow_id = db.Column(db.Integer, primary_key=True)
+    lens_id = db.Column(db.Integer, db.ForeignKey('lenses.lens_id'), nullable=False)
+    lender_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    borrower_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
 
@@ -97,7 +97,7 @@ def seed_db():
           model = "RF 70-200 f/2.8L IS USM",
           manufacturer = "Canon",
           mount = "RF",
-          max_aperture = "2.8"
+          max_aperture = "2.8",
           focal_length = "70-200" 
     )
     db.session.add(lens1)
