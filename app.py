@@ -1,12 +1,15 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from flask_jwt_extended import JWTManager
+
 
 
 #CONFIG
 
 app = Flask(__name__)
 
+app.config["JWT_SECRET_KEY"] = "super-secret"
 #establish connection                       dbms                db_user     pwd     URI     PORT    db_name
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://std2_db_dev:224245@localhost:5432/t2a2_lens_library"
 db = SQLAlchemy(app)
@@ -237,6 +240,11 @@ def post_lens():
     db.session.add(lens)
     db.session.commit()
     return lens_schema.dump(lens)
+#login route
+# @app.post("/login")
+# def login():
+#     username = request.json.get("username", None)
+#     password = request.json.get("password", None)
 #Lens fields received from request (from flask) & use schema to load.
 
     # lens_fields = lens_schema.load(request.json)
