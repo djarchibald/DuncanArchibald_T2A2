@@ -19,10 +19,38 @@ class Lens (db.Model):
         #primary key
         lens_id = db.Column(db.Integer, primary_key = True)
         #attributes
-        model = db.Column(db.String(50))
-        manufacturer = db.Column(db.String())
-        mount = db.Column(db.String())
-        max_aperture = db.Column(db.String(3))
+        model = db.Column(db.String(50), nullable = False)
+        manufacturer = db.Column(db.String(), nullable = False)
+        mount = db.Column(db.String(), nullable = False)
+        max_aperture = db.Column(db.String(3), nullable = False)
+        focal_length = db.Column(db.String(50), nullable=False)
+
+class User(db.Model):
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer, primary_key=True)
+    verified = db.Column(db.Boolean, nullable=False, default=False)
+    name = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(50), nullable=False)
+    phone = db.Column(db.String(50), nullable=False)
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    lens_id = db.Column(db.Integer, db.ForeignKey('lenses.id'), nullable=False)
+    comment = db.Column(db.String(500), nullable=False)
+
+class Borrow(db.Model):
+    __tablename__ = 'borrows'
+
+    id = db.Column(db.Integer, primary_key=True)
+    lens_id = db.Column(db.Integer, db.ForeignKey('lenses.id'), nullable=False)
+    lender_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    borrower_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    start_date = db.Column(db.Date, nullable=False)
+    end_date = db.Column(db.Date, nullable=False)
 
 #SCHEMAS
 
@@ -48,7 +76,8 @@ def seed_db():
           model = "RF 70-200 f/2.8L IS USM",
           manufacturer = "Canon",
           mount = "RF",
-          max_aperture ="2.8" 
+          max_aperture = "2.8"
+          focal_length = "70-200" 
     )
     db.session.add(lens1)
 
@@ -57,6 +86,7 @@ def seed_db():
     lens2.manufacturer = "Canon"
     lens2.mount = "EF"
     lens2.max_aperture = "4"
+    lens2.focal_length = "70-300"
     
     db.session.add(lens2)
 
@@ -65,6 +95,7 @@ def seed_db():
     lens3.manufacturer = "Canon"
     lens3.mount = "RF"
     lens3.max_aperture = "2.8"
+    lens3.focal_length = "15-35"
 
     db.session.add(lens3)
 
@@ -73,6 +104,7 @@ def seed_db():
     lens4.manufacturer = "Tamron"
     lens4.mount = "EF"
     lens4.max_aperture = "3.5"
+    lens4.focal_length = "10-24"
 
     db.session.add(lens4)
 
@@ -81,14 +113,16 @@ def seed_db():
     lens5.manufacturer = "Sigma"
     lens5.mount = "EF"
     lens5.max_aperture = "1.4"
+    lens5.focal_length = "85"
 
     db.session.add(lens5)
 
     lens6 = Lens()
-    lens6.model = "XF16-55 f2.8 R LM WR"
+    lens6.model = "XF 16-55 f2.8 R LM WR"
     lens6.manufacturer = "Fujinon"
     lens6.mount = "X"
     lens6.max_aperture = "2.8"
+    lens6.focal_length = "16-55"
 
     db.session.add(lens6)
 
@@ -97,6 +131,7 @@ def seed_db():
     lens7.manufacturer = "Sony"
     lens7.mount = "FE"
     lens7.max_aperture = "2.8"
+    lens7.focal_length = "24-70"
 
     db.session.add(lens7)
 
@@ -105,6 +140,7 @@ def seed_db():
     lens8.manufacturer = "Sigma"
     lens8.mount = "EF"
     lens8.max_aperture = "2.8"
+    lens8.focal_length = "24-70"
 
     db.session.add(lens8)
 
@@ -113,6 +149,7 @@ def seed_db():
     lens9.manufacturer = "Sony"
     lens9.mount = "FE"
     lens9.max_aperture = "1.4"
+    lens9.focal_length = "50"
 
     db.session.add(lens9)
 
@@ -121,6 +158,7 @@ def seed_db():
     lens10.manufacturer = "Leica"
     lens10.mount = "M"
     lens10.max_aperture = "3.8"
+    lens10.focal_length = "18"
 
     db.session.add(lens10)
 
@@ -129,6 +167,7 @@ def seed_db():
     lens11.manufacturer = "Leica"
     lens11.mount = "M"
     lens11.max_aperture = "1.4"
+    lens11.focal_length = "21"
 
     db.session.add(lens11)
 
@@ -140,23 +179,7 @@ def drop_db():
      db.drop_all()
      print ("tables dropped")
 
-    #  lens_list = Lens[
-    #     ("RF 70-200 f/2.8L IS USM", "Canon", "RF", "2.8"),
-    #     ("EF 70-300mm f/4-5.6 IS II USM", "Canon", "EF", "4"),
-    #     ("RF 15-35mm f/2.8L IS USM", "Canon", "RF", "2.8"),
-    #     ("10-24mm f/3.5-4.5 Di II VC HLD", "Tamron", "EF", "3.5"),
-    #     ("AF 85mm F1.4 DG HSM Art", "Sigma", "EF", "1.4"),
-    #     ("XF16-55mm F2.8 R LM WR", "Fujinon", "X", "2.8"),
-    #     ("FE 24-70mm f/2.8 G Master", "Sony", "FE", "2.8"),
-    #     ("24-70mm f/2.8 DG DN Art", "Sigma", "EF", "2.8"),
-    #     ("FE 50mm f/1.4 GM", "Sony", "FE", "1.4"),
-    #     ("Super-Elmar-M 18mm f/3.8 ASPH", "Leica", "M", "3.8"),
-    #     ("SUMMILUX-M 21 f/1.4 ASPH", "Leica", "M", "1.4")
-    # ]
-     
-     
 
-    
 #ROUTES
 @app.route("/")
 def index():
