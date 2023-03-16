@@ -16,14 +16,13 @@ ma = Marshmallow(app)
 class Lens (db.Model):
        #tablename
         __tablename__ = "lenses"
-        #primary key
         lens_id = db.Column(db.Integer, primary_key = True)
-        #attributes
         model = db.Column(db.String(50), nullable = False)
         manufacturer = db.Column(db.String(), nullable = False)
         mount = db.Column(db.String(), nullable = False)
         max_aperture = db.Column(db.String(3), nullable = False)
         focal_length = db.Column(db.String(50), nullable=False)
+        owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -56,12 +55,34 @@ class Borrow(db.Model):
 
 class LensSchema(ma.Schema):
     class Meta:
-        fields = ("lens_id", "model", "manufacturer", "mount", "max_aperture")
+        fields = ("lens_id", "model", "manufacturer", "mount", "max_aperture", "focal_length", "owner_id")
 #multiple lenses schema to handle list of lenses
 lenses_schema = LensSchema(many=True)    
 #single lens schema to handle lens object 
 lens_schema = LensSchema()
-         
+
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ("user_id", "verified", "name", "email", "phone")
+#multiple users schema
+users_schema = UserSchema(many=True)
+#single user schema
+user_schema = UserSchema()   
+
+class CommentSchema(ma.Schema):
+    class Meta:
+        fields = ("comment_id", "user_id", "lens_id", "comment")
+    
+comments_schema = CommentSchema(many=True)
+comment_schema = CommentSchema()
+
+class BorrowSchema(ma.Schema):
+    class Meta:
+        fields = ("borrow_id", "lens_id", "borrower_id", "lender_id", "start_date", "end_date")
+
+borrows_schema = BorrowSchema(many=True)
+borrow_schema = BorrowSchema()
+
 
 #CLI COMMANDS
 
