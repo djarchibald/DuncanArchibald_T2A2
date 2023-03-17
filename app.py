@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 load_dotenv()
+from datetime import datetime
 
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
@@ -356,6 +357,50 @@ def post_user():
     db.session.add(user)
     db.session.commit()
     return user_schema.dump(user)
+
+# borrows
+@app.route("/borrows", methods =["GET"])
+def get_borrows():
+    borrow_list = Borrow.query.all()
+    data = borrows_schema.dump(borrow_list)
+    return data
+# single borrow found by id
+@app.route("/borrows/<int:id>", methods =["GET"])
+def get_borrow(id):
+    borrow = Borrow.query.get(id)
+    data = borrow_schema.dump(borrow)
+    return data
+
+# @app.route("/borrows", methods= ["POST"])
+# def post_borrow():
+#     #receive user fields from the flask request, use schema to load
+#     borrow_fields = borrow_schema.load(request.json)
+#     #accessing user fields
+
+#     borrow = Borrow(
+#          borrow_id = borrow_fields["borrow_id"],
+#          lens_id = borrow_fields["lens_id"],
+#          lender_id = borrow_fields["lender_id"],
+#          borrower_id = borrow_fields["borrower_id"],
+#          start_date = borrow_fields["start_date"],
+#          end_date = borrow_fields["end_date"]
+#     )
+
+#     db.session.add(borrow)
+#     db.session.commit()
+#     return user_schema.dump(borrow)
+
+@app.route("/comments", methods =["GET"])
+def get_comments():
+    comment_list = Comment.query.all()
+    data = comments_schema.dump(comment_list)
+    return data
+# single borrow found by id
+@app.route("/comments/<int:id>", methods =["GET"])
+def get_comment(id):
+    comment = Comment.query.get(id)
+    data = comment_schema.dump(comment)
+    return data
 #LOGIN ROUTE
 
 # @app.route("/login", methods=["POST"])
