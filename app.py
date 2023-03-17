@@ -307,7 +307,7 @@ def get_lens(id):
     data = lens_schema.dump(lens)
     return data
 
-
+# post lens
 @app.route("/lenses", methods= ["POST"])
 def post_lens():
     #receive lens fields from the flas request, use schema to load
@@ -338,7 +338,24 @@ def get_user(id):
     user = User.query.get(id)
     data = user_schema.dump(user)
     return data
+# post user
 
+@app.route("/users", methods= ["POST"])
+def post_user():
+    #receive user fields from the flask request, use schema to load
+    user_fields = user_schema.load(request.json)
+    #accessing user fields
+
+    user = User(
+         name = user_fields["name"],
+         phone = user_fields["phone"],
+         email = user_fields["email"]
+         
+    )
+
+    db.session.add(user)
+    db.session.commit()
+    return user_schema.dump(user)
 #LOGIN ROUTE
 
 # @app.route("/login", methods=["POST"])
