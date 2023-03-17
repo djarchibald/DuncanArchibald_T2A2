@@ -13,6 +13,7 @@ lens_list = [
     (Super-Elmar-M 18mm f/3.8 ASPH, Leica, M, 3.8)
     (SUMMILUX-M 21 f/1.4 ASPH, Leica, M, 1.4)
 
+
 ]
 
-
+postgresql+psycopg2://std2_db_dev:224245@localhost:5432/t2a2_lens_library"
