@@ -1,8 +1,8 @@
 import os
 from dotenv import load_dotenv
 load_dotenv()
-from datetime import datetime
 
+from datetime import datetime
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
@@ -13,14 +13,17 @@ from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity
 #CONFIG
 
 app = Flask(__name__)
-app.config["JWT_SECRET_KEY"] = "your_secret_key"
-jwt = JWTManager(app)
+# app.config["JWT_SECRET_KEY"] = "your_secret_key"
+# jwt = JWTManager(app)
 
 
 #establish connection                       dbms                db_user     pwd     URI     PORT    db_name
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+# app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app.config.from_object("config.app_config")
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+
+
 
 #MODELS
 class Lens (db.Model):
