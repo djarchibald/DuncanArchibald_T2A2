@@ -10,18 +10,21 @@ def get_users():
     users = User.query.all()
     return users_schema.dump(users) 
 
+@user.get("/<int:id>")
+def get_user(id):
+    user = User.query.get(id)
+    if not user:
+        return {"message": "That user doesn't exist"}
+    
+    return user_schema.dump(user) 
+
 @user.post("/")
 def create_user():
     try:
         user_fields = user_schema.load(request.json)
 
         user = User(**user_fields)
-            # name=user_fields["name"],
-            # verified=user_fields["verified"],
-            # phone = user_fields["phone"],
-            # email = user_fields["email"],
-    
-
+           
         db.session.add(user)
         db.session.commit()
     except:

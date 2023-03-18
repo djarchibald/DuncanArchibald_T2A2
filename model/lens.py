@@ -8,4 +8,4 @@ class Lens (db.Model):
         manufacturer = db.Column(db.String(), nullable = False)
         mount = db.Column(db.String(), nullable = False)
         max_aperture = db.Column(db.String(), nullable = False)
-        owner_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=True)
+        user_id = db.Column(db.Integer(), db.ForeignKey("users.user_id"), nullable=False)
