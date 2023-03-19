@@ -9,4 +9,4 @@ class User(db.Model):
     email = db.Column(db.String(), nullable=False)
     phone = db.Column(db.String(), nullable=False)
 
-    lens = db.relationship('Lens', backref='user',lazy=True)
+    # lens = db.relationship('Lens', backref='users',)

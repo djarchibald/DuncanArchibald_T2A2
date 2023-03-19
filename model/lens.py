@@ -10,4 +10,4 @@ class Lens (db.Model):
         max_aperture = db.Column(db.String(), nullable = False)
         user_id = db.Column(db.Integer(), db.ForeignKey("users.user_id"), nullable=False)
 
-       
+        user = db.relationship('User', backref='lenses')
