@@ -1,11 +1,11 @@
 from app import ma
-from marshmallow import fields
+# from marshmallow import fields
 
 class LensSchema(ma.Schema):
     class Meta:
-        fields = ("lens_id", "model", "manufacturer", "mount", "max_aperture", "user_id")
+        fields = ("lens_id", "model", "manufacturer", "mount", "max_aperture", "user")
 
-    user = fields.Nested("UserSchema")
+    user = ma.Nested("UserSchema")
 
 #multiple lenses schema to handle list of lenses
 lenses_schema = LensSchema(many=True)    

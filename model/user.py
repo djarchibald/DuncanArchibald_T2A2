@@ -8,3 +8,5 @@ class User(db.Model):
     name = db.Column(db.String(), nullable=False, unique=True)
     email = db.Column(db.String(), nullable=False)
     phone = db.Column(db.String(), nullable=False)
+
+    lens = db.relationship('Lens', backref='user',lazy=True)
