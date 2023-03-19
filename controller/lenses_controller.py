@@ -21,14 +21,14 @@ def get_lens(id):
 
 @lens.post("/")
 def create_lens():
-    # try:
+    try:
         lens_fields = lens_schema.load(request.json)
 
         lens = Lens(**lens_fields)
            
         db.session.add(lens)
         db.session.commit()
-    # except:
-    #     return {"message": "Your information is incorrect" }
+    except:
+        return {"message": "Your information is incorrect" }
     
-        return lens_schema.dump(lens)
+    return lens_schema.dump(lens)

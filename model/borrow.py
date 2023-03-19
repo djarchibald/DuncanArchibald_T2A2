@@ -10,3 +10,4 @@ class Borrow(db.Model):
     borrower_id = db.Column(db.Integer(), db.ForeignKey('users.user_id'), nullable=False)
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
+

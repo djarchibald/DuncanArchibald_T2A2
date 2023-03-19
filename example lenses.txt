@@ -1,0 +1,102 @@
+if needed for seeding:
+
+# @app.cli.command("seed")
+# def seed_db():
+#     lens1 = Lens(
+#           model = "RF 70-200 f/2.8L IS USM",
+#           manufacturer = "Canon",
+#           mount = "RF",
+#           max_aperture = "2.8"
+#         #   focal_length = "70-200" 
+#     )
+#     db.session.add(lens1)
+
+#     lens2 = Lens()
+#     lens2.model = "EF 70-300 f/4-5.6 IS II USM"     
+#     lens2.manufacturer = "Canon"
+#     lens2.mount = "EF"
+#     lens2.max_aperture = "4"
+#     # lens2.focal_length = "70-300"
+    
+#     db.session.add(lens2)
+
+#     lens3 = Lens()
+#     lens3.model = "RF 15-35 f/2.8L IS USM"
+#     lens3.manufacturer = "Canon"
+#     lens3.mount = "RF"
+#     lens3.max_aperture = "2.8"
+#     # lens3.focal_length = "15-35"
+
+#     db.session.add(lens3)
+
+#     lens4 = Lens()
+#     lens4.model = "10-24 f/3.5-4.5 Di II VC HLD"
+#     lens4.manufacturer = "Tamron"
+#     lens4.mount = "EF"
+#     lens4.max_aperture = "3.5"
+#     # lens4.focal_length = "10-24"
+
+#     db.session.add(lens4)
+
+#     lens5 = Lens()
+#     lens5.model = "AF 85 f1.4 DG HSM Art"
+#     lens5.manufacturer = "Sigma"
+#     lens5.mount = "EF"
+#     lens5.max_aperture = "1.4"
+#     # lens5.focal_length = "85"
+
+#     db.session.add(lens5)
+
+#     lens6 = Lens()
+#     lens6.model = "XF 16-55 f2.8 R LM WR"
+#     lens6.manufacturer = "Fujinon"
+#     lens6.mount = "X"
+#     lens6.max_aperture = "2.8"
+#     # lens6.focal_length = "16-55"
+
+#     db.session.add(lens6)
+
+#     lens7 = Lens()
+#     lens7.model = "FE 24-70 f/2.8 G Master"
+#     lens7.manufacturer = "Sony"
+#     lens7.mount = "FE"
+#     lens7.max_aperture = "2.8"
+#     # lens7.focal_length = "24-70"
+
+#     db.session.add(lens7)
+
+#     lens8 = Lens()
+#     lens8.model = "24-70 f/2.8 DG DN Art"
+#     lens8.manufacturer = "Sigma"
+#     lens8.mount = "EF"
+#     lens8.max_aperture = "2.8"
+#     # lens8.focal_length = "24-70"
+
+#     db.session.add(lens8)
+
+#     lens9 = Lens()
+#     lens9.model = "FE 50 f/1.4 GM"
+#     lens9.manufacturer = "Sony"
+#     lens9.mount = "FE"
+#     lens9.max_aperture = "1.4"
+#     # lens9.focal_length = "50"
+
+#     db.session.add(lens9)
+
+#     lens10 = Lens()
+#     lens10.model = "Super-Elmar-M 18 f/3.8 ASPH"
+#     lens10.manufacturer = "Leica"
+#     lens10.mount = "M"
+#     lens10.max_aperture = "3.8"
+#     # lens10.focal_length = "18"
+
+#     db.session.add(lens10)
+
+#     lens11 = Lens()
+#     lens11.model = "SUMMILUX-M 21 f/1.4 ASPH"
+#     lens11.manufacturer = "Leica"
+#     lens11.mount = "M"
+#     lens11.max_aperture = "1.4"
+#     # lens11.focal_length = "21"
+
+#     db.session.add(lens11)

@@ -1,14 +1,15 @@
 from app import ma
-from marshmallow import fields
+
 
 class BorrowSchema(ma.Schema):
     class Meta:
-        fields = ("borrow_id", "lens_id", "borrower_id", "lender_id", "start_date", "end_date")
+        fields = ("borrow_id", "lens_id", "borrower_id", "lender_id", "start_date", "end_date", "lenses")
 
-    user = fields.Nested("UserSchema")
-    lens = fields.Nested("LensSchema")
-    start_date = fields.DateTime(format="%Y-%m-%d")
-    end_date = fields.DateTime(format="%Y-%m-%d")
+    
+    user = ma.Nested("UserSchema")
+    lens = ma.Nested("LensSchema")
+    start_date = ma.DateTime(format="%Y-%m-%d")
+    end_date = ma.DateTime(format="%Y-%m-%d")
 
 borrows_schema = BorrowSchema(many=True)
 borrow_schema = BorrowSchema()

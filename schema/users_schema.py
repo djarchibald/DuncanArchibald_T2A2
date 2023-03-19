@@ -1,5 +1,5 @@
 from app import ma
-# from marshmallow import fields
+
 
 class UserSchema(ma.Schema):
     class Meta:
